@@ -83,7 +83,7 @@ arr.forEach((element, index) => {
     Axios.put("https://mern-back-2pn7.onrender.com/product/edit-product/" + id22 , newObj)
     .then((res)=>{
         if(res.status === 200){
-            alert("Record updated successfully");
+            console.log("Record updated successfully");
         }
         else{
             Promise.reject();
@@ -93,7 +93,7 @@ arr.forEach((element, index) => {
     Axios.put("https://mern-back-2pn7.onrender.com/product/edit-login/" + id1 , newObj)
     .then((res)=>{
         if(res.status === 200){
-            alert("Record updated successfully");
+            console.log("Record updated successfully");
         }
         else{
             Promise.reject();
