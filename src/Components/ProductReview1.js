@@ -21,6 +21,16 @@ const ProductReview1 = () => {
   const id2=location.state.id2;
   const image=location.state.image;
   const name=location.state.name;
+  const [value,setValue]=useState();
+  const [data1,setData1]=useState([])
+  const onChange=async(e)=>{
+    setValue(e.target.value);
+    const response=await fetch('https://mern-back-2pn7.onrender.com/product');
+    const data=await response.json()
+    setData1(data);
+    navigate('/product-review',{replace:true,state:{productN: productN,
+      productR: productR,id2:id2,name:name,image:image}})
+  }
   const ProductName = productN.toLowerCase();
   const [isDropdownVisible, setDropdownVisible] = useState(false);
   const toggleDropdown = () => {
@@ -63,11 +73,30 @@ const productsData=arr;
         <div onClick={()=>{ navigate('/dashboard',{replace:true,state:{id1:id2}});}}>
           <img src={logo} alt="Logo" className="logo"/>
           </div>
-          <input
-            type="text"
-            placeholder="Search for any product"
-            className="product-search"
-          />
+          <form className="product-search">
+                
+               
+                <img src={search}/>
+                      <input type="text" placeholder="Search for any product..." className="product-search" onChange={onChange} value={value} />
+                     
+                     <button className="search-btn"  style={{display:"none"}}
+                     onClick={()=>{ navigate('/product-review1',{replace:true,state:{productN:value,id2:id2,image:image,name:name}});}}
+                     >Search</button>
+                    
+                    <div className='dropdown-content'>
+                      {
+                       value &&
+                        data1.filter(item => item.name.toLowerCase().startsWith(value.toLowerCase()))
+                        .map(item=> <div key={item._id} onClick={(e)=>setValue(item.name)}>
+                          {item.name}
+                          <hr></hr>
+                        </div>)
+                      }
+                     </div>
+                     
+                    
+                    
+                    </form>
 
           <div className="profile" onClick={toggleDropdown}>
             <img src={image} alt="Profile" style={{borderRadius:"100%"}}/>
@@ -98,11 +127,17 @@ const productsData=arr;
           <div onClick={()=>{ navigate('/product',{replace:true,state:{productN:productR,id2:id2,image:image,name:name}});}}>
           
             <p>{productN}</p>
+            <hr></hr>
             
 
           </div>
+
           <p> {">"}</p>
+          <div>
           <p>{productR}</p>
+          <hr></hr>
+          </div>
+          
             
 
         </div>
@@ -147,13 +182,13 @@ const productsData=arr;
        {matchingProduct.map((product) => (
         <div key={product._id}  className="write-rev">
           <div className="profile">
-            <img src={image} alt="Profile" />
+            <img src={image} alt="Profile" style={{borderRadius:"100%",height:"60px",width:"60px"}}/>
             <p>{name}</p>
           </div>
-          <div onClick={()=>navigate('/write-review',{replace:true,state:{ productN: productR,
-                      productName: productN,id1:id2,image:image,name:name}})}>
+          <div onClick={()=>navigate('/write-review',{replace:true,state:{ productN: productN,
+                      productName: product.name,id1:id2,image:image,name:name}})}>
           
-          <button className="writeRev-button ">Review it</button>
+          <button className="writeRev-button "><div className="btn-circle1"></div><span>Review it</span><div className="btn-circle2" ></div></button>
           </div>
           
         </div>
@@ -212,3 +247,4 @@ export default ProductReview1;
               <div style={{ display: "flex", alignItems: "center" }}></div>
             </div> */
 }
+
