@@ -119,7 +119,7 @@ const Profile = () => {
         //     else{
         //         Promise.reject();
         //     }
-        fetch("https://mern-back-2pn7.onrender.com/update-profile/" + id,{
+        fetch("https://mern-back-2pn7.onrender.com/product/update-profile/" + id,{
             method:"PUT",
             crossDomain:true,
             headers:{
@@ -134,7 +134,7 @@ const Profile = () => {
                 country:country1,
                 lang:lang1
             })
-        }).then((res)=>res.json()).then((data)=>console.log(data))
+        }).then((res)=>res.json()).then((data)=>alert("Profile Updated Succesfully"))
         // })
         // Handle the file change event here, if needed
         // const selectedFile = e.target.files[0];
