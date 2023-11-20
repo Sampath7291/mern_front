@@ -247,3 +247,4 @@ export default ProductReview1;
               <div style={{ display: "flex", alignItems: "center" }}></div>
             </div> */
 }
+
