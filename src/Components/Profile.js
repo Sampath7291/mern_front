@@ -75,7 +75,7 @@ const Profile = () => {
                 image:image1,
 
             })
-        }).then((res)=>res.json()).then((data)=>alert("Profile Updated Succcessfully!")
+        }).then((res)=>res.json()).then((data)=>alert("Profile Updated Succcessfully!"))
         // })
         // Handle the file change event here, if needed
         // const selectedFile = e.target.files[0];
